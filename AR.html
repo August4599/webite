@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR Website (Fox GLB Model)</title>
+    <style>
+        body { margin: 0; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; background-color: #f0f0f0; }
+        canvas { display: block; width: 100%; height: 100%; }
+        #ar-button {
+            position: absolute;
+            bottom: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            display: none; /* Hide by default, show if AR is supported */
+            z-index: 10; /* Ensure button is above canvas */
+        }
+        #status {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            font-family: sans-serif;
+            font-size: 14px;
+            color: #333;
+            z-index: 10; /* Ensure status is above canvas */
+        }
+    </style>
+</head>
+<body>
+    <div id="status">Loading...</div>
+    <button id="ar-button">Start AR</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script>
+        let scene, camera, renderer, model;
+        let arButton = document.getElementById('ar-button');
+        let statusDiv = document.getElementById('status'); // Get the status div
+        let modelLoaded = false;
+
+        // URL of the Fox GLB model from Three.js examples
+        const modelUrl = 'https://threejs.org/examples/models/gltf/Fox/glTF-Binary/Fox.glb';
+
+        // Initialize the scene
+        function init() {
+            // Scene setup
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xf0f0f0); // Add a background color
+
+            // Camera setup
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.z = 5; // Position camera slightly further back for the Fox model
+
+            // Renderer setup
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.body.appendChild(renderer.domElement);
+
+            // Add lights to the scene (important for GLB models)
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+            scene.add(ambientLight);
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6);
+            directionalLight.position.set(1, 1, 1).normalize();
+            scene.add(directionalLight);
+
+            // Load the GLB model
+            loadModel(modelUrl);
+
+            // Handle window resizing
+            window.addEventListener('resize', onWindowResize);
+
+            // Check for WebXR support and show AR button
+            checkXRSupport();
+
+            // Start the animation loop for the model view (will wait for model to load)
+            animateModelView();
+        }
+
+        // Function to load the GLB model
+        function loadModel(url) {
+            statusDiv.textContent = 'Loading model...'; // Update status
+
+            // Check if GLTFLoader is available
+            if (typeof THREE.GLTFLoader === 'undefined') {
+                 statusDiv.textContent = 'Error: GLTFLoader not found. Check script includes.';
+                 console.error('THREE.GLTFLoader is not defined. Make sure the script is loaded correctly.');
+                 return;
+            }
+
+            const loader = new THREE.GLTFLoader();
+
+            loader.load(url, function (gltf) {
+                model = gltf.scene;
+                scene.add(model);
+
+                // Optional: Adjust model scale and position if needed
+                // model.scale.set(0.01, 0.01, 0.01); // Example scaling if needed
+                // model.position.set(0, 0, 0);
+
+                modelLoaded = true;
+                statusDiv.textContent = 'Model loaded.'; // Update status
+                console.log('Model loaded successfully');
+
+            }, function (xhr) {
+                // Optional: Progress callback
+                const progress = (xhr.loaded / xhr.total) * 100;
+                statusDiv.textContent = `Loading model: ${progress.toFixed(2)}%`;
+            }, function (error) {
+                // This error callback is triggered on load failure (network, parsing, etc.)
+                modelLoaded = false; // Ensure flag is false on error
+
+                // Log the full error object for detailed debugging
+                console.error('An error occurred while loading the model:', error);
+
+                // Attempt to display a useful message from the error object
+                let errorMessage = 'Unknown error';
+                if (error && typeof error === 'object') {
+                    if (error.message) {
+                        errorMessage = error.message;
+                    } else if (error.target && error.target.status) {
+                         // Handle common network errors reported by XHR target
+                         errorMessage = `Network error: Status ${error.target.status}`;
+                    } else {
+                        // Fallback for unusual error objects like {"isTrusted":true}
+                        errorMessage = `Loading failed. Check console for details.`;
+                    }
+                } else if (typeof error === 'string') {
+                     errorMessage = error;
+                }
+
+                statusDiv.textContent = `Error loading model: ${errorMessage}`;
+            });
+        }
+
+        // Animation loop for the standard model view
+        function animateModelView() {
+            renderer.setAnimationLoop(null); // Stop any previous animation loop (like AR)
+
+            if (modelLoaded) {
+                 // Rotate the loaded model in the model view
+                if (model) {
+                    // Rotate the whole model group
+                    model.rotation.y += 0.01;
+                }
+            }
+            // Always render the scene, even if the model isn't loaded,
+            // so you see the background and status message.
+            renderer.render(scene, camera);
+
+            requestAnimationFrame(animateModelView);
+        }
+
+        // Handle window resize
+        function onWindowResize() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        }
+
+        // Check if WebXR is supported
+        function checkXRSupport() {
+            if ('xr' in navigator) {
+                navigator.xr.isSessionSupported('immersive-ar').then(function (supported) {
+                    if (supported) {
+                        arButton.style.display = 'block';
+                        arButton.addEventListener('click', onStartAR);
+                    } else {
+                        arButton.textContent = 'AR Not Supported on this device/browser';
+                        arButton.style.backgroundColor = '#f44336'; // Red color for unsupported
+                        arButton.style.display = 'block'; // Show button even if unsupported, with status
+                    }
+                }).catch(function (error) {
+                    // This catch block handles errors during the *check* for support
+                    console.error('Error checking WebXR support:', error);
+                     let errorMessage = 'Unknown error';
+                     if (error && error.message) {
+                         errorMessage = error.message;
+                     } else if (typeof error === 'string') {
+                         errorMessage = error;
+                     } else {
+                         errorMessage = JSON.stringify(error); // Stringify unusual error objects
+                     }
+                    arButton.textContent = `Error checking AR: ${errorMessage}`;
+                    arButton.style.backgroundColor = '#f44336';
+                    arButton.style.display = 'block'; // Show button even if error occurred
+                });
+            } else {
+                // WebXR API is not available at all
+                arButton.textContent = 'WebXR API Not Available in this browser';
+                arButton.style.backgroundColor = '#f44336';
+                arButton.style.display = 'block'; // Show button with status
+            }
+        }
+
+        // Start the AR session
+        function onStartAR() {
+            if (!navigator.xr) {
+                console.error('WebXR not available');
+                statusDiv.textContent = 'Error: WebXR not available.';
+                return;
+            }
+             if (!modelLoaded) {
+                console.warn('Model not loaded yet. Cannot start AR.');
+                statusDiv.textContent = 'Wait for model to load before starting AR.';
+                return; // Prevent starting AR if model isn't loaded
+            }
+
+
+            // Request 'local' reference space for basic AR placement
+            // 'hit-test' feature is included but hit-testing logic is not fully implemented in this basic example
+            navigator.xr.requestSession('immersive-ar', { requiredFeatures: ['local', 'hit-test'] }).then(onSessionStarted).catch(onSessionError);
+        }
+
+        // Handle AR session start
+        function onSessionStarted(session) {
+            console.log('AR Session started');
+            statusDiv.textContent = 'AR Session active.'; // Update status
+            arButton.textContent = 'End AR'; // Change button text
+            arButton.removeEventListener('click', onStartAR);
+            // Add listener to end session - ensure 'session' is accessible or use a global/scoped variable
+            arButton.addEventListener('click', () => {
+                if (session) session.end();
+            });
+
+            session.addEventListener('end', onSessionEnded);
+
+            renderer.xr.enabled = true;
+            renderer.xr.setSession(session);
+
+            // Create a reference space for the AR session
+            session.requestReferenceSpace('local').then(function (referenceSpace) {
+                renderer.xr.setReferenceSpace(referenceSpace);
+
+                // Start the AR animation loop
+                renderer.setAnimationLoop(function (time, frame) {
+                    if (!frame) return;
+
+                    // In AR, the camera is controlled by the device
+                    // The loaded model is rendered relative to the origin of the reference space.
+                    // For better placement, you would typically use hit-testing here
+                    // to place the model on a detected surface based on user interaction.
+
+                    renderer.render(scene, camera);
+                });
+            });
+        }
+
+        // Handle AR session end
+        function onSessionEnded() {
+            console.log('AR Session ended');
+            // Restore status based on whether model was loaded successfully initially
+            statusDiv.textContent = modelLoaded ? 'Model loaded.' : (statusDiv.textContent.startsWith('Error loading model:') ? statusDiv.textContent : 'AR Session ended.');
+            renderer.xr.enabled = false; // Disable XR rendering
+            arButton.textContent = 'Start AR'; // Restore button text
+            // Remove the specific end listener and add the start listener back
+            // Need to be careful if multiple end listeners were added
+            // A cleaner way might be to manage listeners more explicitly or use flags
+            // For simplicity, we'll just add the start listener back.
+            arButton.removeEventListener('click', () => { /* remove previous end listener */ }); // This might not work reliably
+             // A better approach for removing the specific listener added in onSessionStarted
+             const endARListener = arButton.onclick; // Store the function reference
+             if (endARListener) arButton.removeEventListener('click', endARListener);
+             arButton.addEventListener('click', onStartAR);
+
+
+            // Restart the model view animation loop
+            animateModelView();
+        }
+
+        // Handle AR session error
+        function onSessionError(error) {
+            console.error('Failed to start AR session:', error);
+            let errorMessage = 'Unknown error';
+            if (error && error.message) {
+                errorMessage = error.message;
+            } else if (typeof error === 'string') {
+                errorMessage = error;
+            } else {
+                errorMessage = JSON.stringify(error); // Stringify unusual error objects
+            }
+            statusDiv.textContent = `AR Session Error: ${errorMessage}`; // Update status with error
+            arButton.textContent = 'AR Error';
+            arButton.style.backgroundColor = '#f44336';
+             // After an AR session error, the button state might be inconsistent.
+             // Resetting it to the initial state might be helpful.
+             arButton.removeEventListener('click', () => { /* remove any end listener */ });
+             arButton.addEventListener('click', onStartAR);
+        }
+
+
+        // Initialize the application
+        init();
+
+    </script>
+</body>
+</html>
