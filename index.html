@@ -3,99 +3,665 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Anime List</title>
+    <title>Your Name - Freelance Video Editor</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom styles can go here if needed, but Tailwind is preferred */
+        /* Custom CSS for Refined Glassmorphism and Animations */
+        :root {
+            /* Discord Colors */
+            --discord-dark: #36393f;
+            --discord-darker: #2f3136;
+            --discord-darkest: #202225;
+            --discord-text: #dcddde;
+            --discord-light-text: #99aab5;
+            --discord-blue: #5865f2;
+            --discord-blue-darker: #4e5d94; /* Darker blue for hover */
+            --discord-grey-hover: #4f545c;
+            --discord-border: rgba(79, 84, 92, 0.3);
+
+            /* Glassmorphism Variables */
+            --glass-bg: rgba(47, 49, 54, 0.75); /* Slightly less transparent */
+            --glass-border: rgba(79, 84, 92, 0.5); /* Slightly less transparent border */
+            --glass-shadow: rgba(0, 0, 0, 0.5); /* Stronger shadow */
+            --glass-blur: 20px; /* Increased blur */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--discord-dark);
+            color: var(--discord-text);
+            overflow-x: hidden;
+            line-height: 1.7; /* Increased line height for readability */
+            font-weight: 400; /* Default font weight */
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700; /* Bold headings */
+            color: white; /* Ensure headings are white */
+        }
+
+        /* Subtle Background Gradient */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+/* Subtle radial gradient for depth */
+background: radial-gradient(circle at top left, rgba(88, 101, 242, 0.1) 0%, transparent 25%),
+            radial-gradient(circle at bottom right, rgba(79, 84, 92, 0.1) 0%, transparent 25%);
+            z-index: -2; /* Further back */
+        }
+
+
+        /* Discord-like Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--discord-darker);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--discord-grey-hover);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #6a717c;
+        }
+
+        .glassmorphic-card {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: 0 15px 50px 0 var(--glass-shadow); /* Stronger shadow */
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smoother transition */
+            z-index: 1; /* Ensure cards are above background pattern */
+        }
+
+        .glassmorphic-card:hover {
+             transform: translateY(-8px); /* More pronounced lift effect */
+             box-shadow: 0 20px 60px 0 var(--glass-shadow); /* Stronger shadow on hover */
+        }
+
+        .animated-gloss {
+            content: '';
+            position: absolute;
+            top: -100%; /* Cover more area */
+            left: -100%; /* Cover more area */
+            width: 300%; /* Larger gloss */
+            height: 300%; /* Larger gloss */
+            background: linear-gradient(
+                60deg,
+                rgba(255, 255, 255, 0.2) 0%, /* Stronger gloss */
+                rgba(255, 255, 255, 0.1) 50%, /* Stronger gloss */
+                rgba(255, 255, 255, 0.2) 100% /* Stronger gloss */
+            );
+            transform: rotate(45deg);
+            opacity: 0.7; /* Slightly more visible */
+            animation: gloss-slide 12s infinite linear; /* Slower, smoother animation */
+            pointer-events: none;
+             z-index: 0; /* Ensure gloss is behind content but within the card */
+        }
+
+        @keyframes gloss-slide {
+            0% { transform: rotate(45deg) translate(-100%, -100%); }
+            100% { transform: rotate(45deg) translate(100%, 100%); }
+        }
+
+        .discord-sidebar {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border-right: 1px solid var(--glass-border);
+            width: 280px; /* Wider sidebar */
+            flex-shrink: 0;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 10;
+            padding: 20px 0; /* Adjust padding */
+        }
+
+        .discord-sidebar .logo {
+            font-size: 1.8rem; /* Larger logo text */
+            font-weight: 700;
+            color: white;
+            text-align: center;
+            margin-bottom: 30px; /* More space below logo */
+            padding: 0 20px;
+        }
+
+        .discord-main-content {
+            margin-left: 280px; /* Offset for wider sidebar */
+            padding: 40px; /* Increased padding */
+            flex-grow: 1;
+        }
+
+        section {
+             margin-bottom: 40px; /* More space between sections */
+             padding: 30px; /* Increased internal padding */
+        }
+
+        /* Adjust spacing for the About section specifically */
+        #about {
+            padding-top: 20px; /* Reduced top padding */
+        }
+
+         #about h2 {
+            margin-bottom: 20px; /* Reduced margin below heading */
+         }
+
+
+        /* Style for navigation links */
+        .nav-link {
+            display: block;
+            padding: 14px 30px; /* Increased padding */
+            color: var(--discord-text);
+            text-decoration: none;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            border-radius: 8px;
+            margin: 6px 15px; /* Adjusted margin */
+            font-size: 1.1rem;
+            font-weight: 600; /* Semi-bold */
+        }
+
+        .nav-link:hover {
+            background-color: var(--discord-grey-hover);
+            color: white;
+        }
+
+        .nav-link.active {
+            background-color: var(--discord-blue);
+            color: white;
+             box-shadow: 0 2px 8px rgba(88, 101, 242, 0.4); /* Subtle shadow for active */
+        }
+
+        /* Portfolio grid */
+        .portfolio-grid {
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Flexible grid */
+            gap: 30px; /* Increased gap */
+        }
+
+        /* Portfolio item styling */
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background-color: rgba(47, 49, 54, 0.5); /* Slightly more opaque */
+            border: 1px solid rgba(79, 84, 92, 0.3); /* Slightly more opaque */
+             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for items */
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.04); /* Slightly more zoom */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
+        }
+
+        .portfolio-item img {
+            width: 100%;
+            height: 220px; /* Slightly increased height */
+            object-fit: cover;
+            display: block;
+        }
+
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.4s ease; /* Smoother transition */
+            padding: 20px;
+            text-align: center;
+        }
+
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+
+        .portfolio-overlay span {
+            font-size: 1.4rem; /* Larger title */
+            font-weight: bold;
+            margin-bottom: 8px; /* More space below title */
+        }
+
+         .portfolio-overlay p {
+             font-size: 0.95rem; /* Slightly larger description */
+             color: var(--discord-light-text);
+         }
+
+
+        /* Contact form styling */
+        .contact-form input,
+        .contact-form textarea {
+            background-color: rgba(47, 49, 54, 0.6); /* More opaque */
+            border: 1px solid rgba(79, 84, 92, 0.5); /* More opaque */
+            color: var(--discord-text);
+            padding: 12px; /* Increased padding */
+            border-radius: 8px; /* More rounded */
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--discord-blue);
+            box-shadow: 0 0 0 2px rgba(88, 101, 242, 0.4); /* Blue glow */
+            background-color: rgba(47, 49, 54, 0.7); /* Less transparent on focus */
+            outline: none; /* Remove default outline */
+        }
+
+        .contact-form label {
+            font-weight: 600; /* Semi-bold labels */
+            margin-bottom: 5px;
+            display: block; /* Ensure label is on its own line */
+            color: var(--discord-light-text);
+        }
+
+        .contact-form button {
+            background-color: var(--discord-blue);
+            color: white;
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 14px 28px; /* Increased padding */
+            transition: background-color 0.2s ease, transform 0.1s ease;
+            font-size: 1.1rem;
+        }
+
+        .contact-form button:hover {
+            background-color: var(--discord-blue-darker);
+            transform: translateY(-2px); /* Subtle press effect */
+        }
+
+        /* Testimonials Section */
+        .testimonial-card {
+            background-color: var(--glass-bg);
+            backdrop-filter: blur(var(--glass-blur));
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--glass-border);
+            border-radius: 16px; /* Match main card radius */
+            box-shadow: 0 8px 25px 0 var(--glass-shadow); /* Stronger shadow */
+            padding: 25px; /* Increased padding */
+            margin-bottom: 25px; /* Increased margin */
+            position: relative;
+        }
+
+        .testimonial-card .quote-icon {
+            color: var(--discord-light-text);
+            font-size: 2.5rem; /* Larger icon */
+            opacity: 0.7; /* More visible */
+            position: absolute;
+            top: 20px; /* Adjusted position */
+            left: 20px; /* Adjusted position */
+        }
+
+         .testimonial-card p {
+            font-style: italic;
+            margin-bottom: 15px; /* More space below quote */
+            padding-left: 40px; /* More space for quote icon */
+            font-size: 1.05rem; /* Slightly larger text */
+         }
+
+         .testimonial-card .author {
+            font-weight: bold;
+            text-align: right;
+            color: var(--discord-light-text);
+            font-size: 1rem;
+         }
+
+        /* Skills Section */
+        .skill-item {
+            background-color: rgba(79, 84, 92, 0.4); /* More opaque */
+            border-radius: 8px; /* More rounded */
+            padding: 10px 18px; /* Increased padding */
+            margin: 6px; /* Increased margin */
+            display: inline-block;
+            font-size: 0.95rem; /* Slightly larger font */
+            color: var(--discord-text); /* Text color */
+            font-weight: 600; /* Semi-bold */
+            transition: background-color 0.2s ease;
+        }
+
+        .skill-item:hover {
+            background-color: rgba(79, 84, 92, 0.6); /* Darker on hover */
+        }
+
+
+        /* Social Links */
+        .social-links {
+            padding: 0 20px; /* Match sidebar padding */
+        }
+        .social-links a {
+            color: var(--discord-light-text);
+            font-size: 1.6rem; /* Slightly larger icons */
+            margin: 0 12px; /* Increased margin */
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--discord-blue);
+            transform: translateY(-3px); /* Lift effect on hover */
+        }
+
+        /* Responsive video container */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin-bottom: 20px; /* Adjusted space below video */
+            border-radius: 12px; /* Match card rounding */
+             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow for video */
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .discord-sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid var(--glass-border);
+                padding: 15px 0;
+            }
+
+             .discord-sidebar .logo {
+                 margin-bottom: 20px;
+             }
+
+            .discord-main-content {
+                margin-left: 0;
+                padding: 20px;
+            }
+
+            section {
+                margin-bottom: 30px;
+                padding: 20px;
+            }
+
+            .nav-link {
+                display: inline-block;
+                margin: 4px;
+                padding: 8px 15px;
+                font-size: 1rem;
+            }
+
+            .portfolio-grid {
+                 gap: 20px;
+            }
+
+            .portfolio-item img {
+                 height: 160px;
+            }
+
+             .testimonial-card {
+                 padding: 20px;
+             }
+
+             .testimonial-card .quote-icon {
+                 font-size: 2rem;
+                 top: 15px;
+                 left: 15px;
+             }
+
+             .testimonial-card p {
+                 padding-left: 30px;
+                 font-size: 1rem;
+             }
+
+              .social-links {
+                 padding: 0 10px;
+             }
+             .social-links a {
+                 font-size: 1.4rem;
+                 margin: 0 8px;
+             }
+        }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body>
 
-    <div class="container mx-auto p-4">
-        <h1 class="text-3xl font-bold text-center mb-8 text-gray-800">Top Anime</h1>
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="discord-sidebar">
+            <div class="logo">Rakshith</div>
+            <nav>
+                <ul>
+                    <li><a href="#about" class="nav-link active">About</a></li>
+                    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+                     <li><a href="#skills" class="nav-link">Skills</a></li>
+                    <li><a href="#services" class="nav-link">Services</a></li>
+                     <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+             <div class="mt-8 text-center social-links">
+                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" target="_blank" aria-label="Vimeo"><i class="fab fa-vimeo"></i></a>
+                <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+        </aside>
 
-        <div id="anime-list-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            </div>
+        <main class="discord-main-content">
 
-        <div id="error-message" class="text-center text-red-600 mt-8 hidden">
-            Failed to load anime list. Please try again later.
-        </div>
+            <section id="about" class="glassmorphic-card">
+                <div class="animated-gloss"></div>
+                <h2 class="text-3xl font-bold mb-6 text-white">About Me</h2>
+
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/your_video_id" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+
+                </section>
+
+            <section id="portfolio" class="glassmorphic-card">
+                 <div class="animated-gloss"></div>
+                <h2 class="text-3xl font-bold mb-6 text-white">Portfolio</h2>
+                <div class="grid portfolio-grid">
+                    <div class="portfolio-item">
+                         <img src="https://placehold.co/600x400/202225/dcddde?text=Project+1" alt="Project 1 Thumbnail">
+                        <div class="portfolio-overlay">
+                            <span class="text-xl font-semibold">Project Title 1</span>
+                             <p class="text-sm mt-2">[Brief description of the project]</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                         <img src="https://placehold.co/600x400/202225/dcddde?text=Project+2" alt="Project 2 Thumbnail">
+                         <div class="portfolio-overlay">
+                            <span class="text-xl font-semibold">Project Title 2</span>
+                             <p class="text-sm mt-2">[Brief description of the project]</p>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                         <img src="https://placehold.co/600x400/202225/dcddde?text=Project+3" alt="Project 3 Thumbnail">
+                         <div class="portfolio-overlay">
+                            <span class="text-xl font-semibold">Project Title 3</span>
+                             <p class="text-sm mt-2">[Brief description of the project]</p>
+                        </div>
+                    </div>
+                     </div>
+            </section>
+
+             <section id="skills" class="glassmorphic-card">
+                 <div class="animated-gloss"></div>
+                <h2 class="text-3xl font-bold mb-6 text-white">Skills</h2>
+                <div class="flex flex-wrap gap-3">
+                    <span class="skill-item">Adobe Premiere Pro</span>
+                    <span class="skill-item">After Effects</span>
+                    <span class="skill-item">DaVinci Resolve</span>
+                    <span class="skill-item">Color Grading</span>
+                    <span class="skill-item">Sound Design</span>
+                    <span class="skill-item">Motion Graphics</span>
+                    <span class="skill-item">Video Editing</span>
+                    <span class="skill-item">Social Media Content</span>
+                    </div>
+            </section>
+
+
+            <section id="services" class="glassmorphic-card">
+                 <div class="animated-gloss"></div>
+                <h2 class="text-3xl font-bold mb-6 text-white">Services Offered</h2>
+                <ul class="list-disc list-inside text-lg leading-relaxed space-y-3">
+                    <li>Video Editing (Promotional, Social Media, Corporate, Events, etc.)</li>
+                    <li>Color Correction and Grading to enhance visual mood</li>
+                    <li>Professional Sound Design and Mixing</li>
+                    <li>Engaging Motion Graphics and Visual Effects</li>
+                    <li>Creation of Short-Form Content (Reels, TikToks, Shorts)</li>
+                    <li>Video Consulting and Strategy</li>
+                    </ul>
+            </section>
+
+             <section id="testimonials" class="glassmorphic-card">
+                 <div class="animated-gloss"></div>
+                <h2 class="text-3xl font-bold mb-6 text-white">Testimonials</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="testimonial-card">
+                        <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"Rakshith delivered exceptional video editing work for our project. They were professional, creative, and met all deadlines. Highly recommended!"</p>
+                        <div class="author">- [Client Name], [Company/Project]</div>
+                    </div>
+                     <div class="testimonial-card">
+                         <i class="fas fa-quote-left quote-icon"></i>
+                        <p>"Working with Rakshith was a fantastic experience. Their attention to detail and ability to understand our vision resulted in a video that exceeded our expectations."</p>
+                        <div class="author">- [Client Name], [Company/Project]</div>
+                    </div>
+                    </div>
+            </section>
+
+
+            <section id="contact" class="glassmorphic-card contact-form">
+                 <div class="animated-gloss"></div>
+                <h2 class="text-3xl font-bold mb-6 text-white">Get in Touch</h2>
+                <p class="text-lg leading-relaxed mb-8">
+                    Ready to start your next video project? Fill out the form below or contact me directly!
+                </p>
+                <form>
+                    <div class="mb-5">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" class="mt-1 block w-full focus:outline-none focus:ring">
+                    </div>
+                    <div class="mb-5">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="mt-1 block w-full focus:outline-none focus:ring">
+                    </div>
+                     <div class="mb-5">
+                        <label for="subject">Subject (Optional)</label>
+                        <input type="text" id="subject" name="subject" class="mt-1 block w-full focus:outline-none focus:ring">
+                    </div>
+                    <div class="mb-6">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" rows="6" class="mt-1 block w-full focus:outline-none focus:ring"></textarea>
+                    </div>
+                    <button type="submit">Send Message</button>
+                </form>
+            </section>
+
+             <footer class="text-center py-8 text-gray-500 text-sm">
+                <p>© 2024 Rakshith. All rights reserved.</p>
+            </footer>
+
+        </main>
     </div>
 
     <script>
-        // Jikan API base URL
-        const API_URL = 'https://api.jikan.moe/v4';
+        // Simple script for active navigation link highlighting and smooth scrolling
+        document.addEventListener('DOMContentLoaded', () => {
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('main section'); // Select sections within main
 
-        // Function to fetch and display top anime
-        async function fetchTopAnime() {
-            const topAnimeEndpoint = `${API_URL}/top/anime`;
-            const animeListContainer = document.getElementById('anime-list-container');
-            const errorMessageElement = document.getElementById('error-message');
-
-            try {
-                const response = await fetch(topAnimeEndpoint);
-
-                // Check if the request was successful
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const data = await response.json();
-                const topAnime = data.data; // The array of anime is in the 'data' property
-
-                // Clear previous content
-                animeListContainer.innerHTML = '';
-                errorMessageElement.classList.add('hidden'); // Hide error message
-
-                // Loop through the top anime and display them
-                topAnime.forEach(anime => {
-                    const animeCard = document.createElement('div');
-                    animeCard.classList.add('bg-white', 'rounded-lg', 'shadow-md', 'overflow-hidden', 'transform', 'transition-transform', 'hover:scale-105');
-
-                    const animeImage = document.createElement('img');
-                    // Use the large image URL if available, otherwise fall back
-                    animeImage.src = anime.images.jpg.large_image_url || anime.images.jpg.image_url;
-                    animeImage.alt = anime.title;
-                    animeImage.classList.add('w-full', 'h-64', 'object-cover');
-                    // Add an onerror handler for broken images
-                    animeImage.onerror = function() {
-                        this.onerror=null; // Prevent infinite loop
-                        this.src='https://placehold.co/256x384/E5E7EB/4B5563?text=Image+Not+Available'; // Placeholder image
-                    };
-
-
-                    const animeTitle = document.createElement('h2');
-                    animeTitle.textContent = anime.title;
-                    animeTitle.classList.add('text-lg', 'font-semibold', 'text-gray-700', 'p-4', 'truncate');
-
-                    // Optional: Add a link to the anime's MyAnimeList page
-                    if (anime.url) {
-                        const animeLink = document.createElement('a');
-                        animeLink.href = anime.url;
-                        animeLink.target = "_blank"; // Open in a new tab
-                        animeLink.appendChild(animeImage);
-                        animeCard.appendChild(animeLink);
-                    } else {
-                         animeCard.appendChild(animeImage);
+            // Function to update active link
+            const updateActiveLink = (id) => {
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + id) {
+                        link.classList.add('active');
                     }
-
-
-                    animeCard.appendChild(animeTitle);
-
-                    animeListContainer.appendChild(animeCard);
                 });
+            };
 
-            } catch (error) {
-                console.error('Error fetching top anime:', error);
-                // Display error message to the user
-                errorMessageElement.classList.remove('hidden');
-                animeListContainer.innerHTML = ''; // Clear any loading indicators if present
+            // Intersection Observer to highlight nav links on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                       updateActiveLink(entry.target.id);
+                    }
+                });
+            }, { threshold: 0.3 }); // Adjust threshold as needed
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Smooth scrolling for navigation links
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+
+                    if (targetSection) {
+                         window.scrollTo({
+                            top: targetSection.offsetTop - 40, // Adjusted offset for padding/spacing
+                            behavior: 'smooth'
+                        });
+                        // Update active link immediately on click
+                        updateActiveLink(targetId);
+                    }
+                });
+            });
+
+             // Initial active link set on page load
+            // Find the first section and set its link as active initially
+            const firstSection = document.querySelector('main section');
+            if (firstSection) {
+                 updateActiveLink(firstSection.id);
             }
-        }
 
-        // Fetch anime when the page loads
-        document.addEventListener('DOMContentLoaded', fetchTopAnime);
+             // Optional: Add fade-in animation on scroll for sections
+            const sectionObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                        sectionObserver.unobserve(entry.target); // Stop observing once visible
+                    }
+                });
+            }, { threshold: 0.1 }); // Trigger when 10% of the section is visible
 
+            sections.forEach(section => {
+                 section.style.opacity = 0; // Start invisible
+                 section.style.transform = 'translateY(20px)'; // Start slightly below
+                 section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out'; // Add transition
+                 sectionObserver.observe(section);
+            });
+        });
     </script>
 
 </body>
