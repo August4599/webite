@@ -294,7 +294,13 @@
             <a href="#home" class="text-2xl md:text-3xl font-bold tracking-wider rounded-md focus:outline-none focus:ring-2 focus:ring-red-accent p-2">
                 RAKSHITH <span class="text-red-accent">|</span> EDITOR
             </a>
-            <nav>
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none focus:ring-2 focus:ring-red-accent p-2 rounded-md">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+
+            <!-- Desktop Navigation -->
+            <nav id="desktop-nav" class="hidden md:flex space-x-6 md:space-x-10">
                 <ul class="flex space-x-6 md:space-x-10">
                     <li><a href="#home" class="text-white hover:text-red-accent transition duration-300 font-medium rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-accent">Home</a></li>
                     <li><a href="#portfolio" class="text-white hover:text-red-accent transition duration-300 font-medium rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-accent">Portfolio</a></li>
@@ -303,6 +309,15 @@
                 </ul>
             </nav>
         </div>
+        <!-- Mobile Navigation (hidden by default) -->
+        <nav id="mobile-nav" class="hidden md:hidden flex-col items-center pt-4 pb-2 bg-black/80 w-full absolute top-full left-0 border-t border-white/10 z-40">
+            <ul class="flex flex-col space-y-4 w-full text-center">
+                <li><a href="#home" class="block text-white hover:text-red-accent transition duration-300 font-medium rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-accent">Home</a></li>
+                <li><a href="#portfolio" class="block text-white hover:text-red-accent transition duration-300 font-medium rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-accent">Portfolio</a></li>
+                <li><a href="#skills" class="block text-white hover:text-red-accent transition duration-300 font-medium rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-accent">Skills</a></li>
+                <li><a href="#contact" class="block text-white hover:text-red-accent transition duration-300 font-medium rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-accent">Contact</a></li>
+            </ul>
+        </nav>
     </header>
 
     <!-- Hero / About Section -->
@@ -455,7 +470,7 @@
 
     <!-- Contact Section -->
     <section id="contact" class="py-20 md:py-36 border-t section-divider-border contact-section">
-        <div class="container mx-auto px-6">
+        <div class="container mx-auto px-6 text-center">
             <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-heading">Get in <span class="text-red-accent">Touch</span></h2>
             <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto font-light">
                 Have a project in mind or just want to say hello? Feel free to reach out! I'm always open to new opportunities and collaborations.
@@ -531,6 +546,11 @@
         const closeInstagramVideoModalBtn = document.getElementById('close-instagram-video-modal');
         const instagramVideoPlayer = document.getElementById('instagram-video-player');
         const instagramPreviewContainer = document.getElementById('instagram-preview-container'); // Get the preview container
+
+        // Get elements for Mobile Navigation
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const desktopNav = document.getElementById('desktop-nav');
+        const mobileNav = document.getElementById('mobile-nav');
 
         // Video URLs (Replace with your actual video URLs)
         const weddingVideoUrl = "https://www.w3schools.com/html/mov_bbb.mp4"; // Using a reliable test MP4
@@ -644,6 +664,23 @@
             }
         });
 
+        // Mobile Menu Toggle Logic
+        if (mobileMenuButton && mobileNav && desktopNav) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileNav.classList.toggle('hidden');
+                mobileNav.classList.toggle('flex'); // Add flex to make it a column
+                // Optionally hide desktop nav on mobile menu open (though Tailwind classes handle this too)
+                // desktopNav.classList.toggle('hidden');
+            });
+
+            // Close mobile menu when a link is clicked
+            mobileNav.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileNav.classList.add('hidden');
+                    mobileNav.classList.remove('flex');
+                });
+            });
+        }
     </script>
 </body>
 </html>
