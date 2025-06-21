@@ -3,666 +3,647 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Freelance Video Editor</title>
+    <title>Rakshith | Video Editor Portfolio</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Custom CSS for Refined Glassmorphism and Animations */
-        :root {
-            /* Discord Colors */
-            --discord-dark: #36393f;
-            --discord-darker: #2f3136;
-            --discord-darkest: #202225;
-            --discord-text: #dcddde;
-            --discord-light-text: #99aab5;
-            --discord-blue: #5865f2;
-            --discord-blue-darker: #4e5d94; /* Darker blue for hover */
-            --discord-grey-hover: #4f545c;
-            --discord-border: rgba(79, 84, 92, 0.3);
-
-            /* Glassmorphism Variables */
-            --glass-bg: rgba(47, 49, 54, 0.75); /* Slightly less transparent */
-            --glass-border: rgba(79, 84, 92, 0.5); /* Slightly less transparent border */
-            --glass-shadow: rgba(0, 0, 0, 0.5); /* Stronger shadow */
-            --glass-blur: 20px; /* Increased blur */
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--discord-dark);
-            color: var(--discord-text);
-            overflow-x: hidden;
-            line-height: 1.7; /* Increased line height for readability */
-            font-weight: 400; /* Default font weight */
+            font-family: 'Poppins', sans-serif;
+            background-color: #100000; /* Very dark red as main background */
+            color: #FFFFFF; /* Pure White for primary text */
+            line-height: 1.6;
+            scroll-behavior: smooth; /* Smooth scrolling for navigation */
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+            position: relative; /* Needed for absolute positioning of grid */
+        }
+        /* Neon animation for red accents (color change + glow) - FASTER with MORE VARIETY */
+        @keyframes neon-glow {
+            0%, 100% {
+                color: #FF0000; /* Pure Red */
+                text-shadow: 0 0 5px rgba(255, 0, 0, 0.5), 0 0 10px rgba(255, 0, 0, 0.4);
+            }
+            15% {
+                color: #FF4500; /* Orange-Red */
+                text-shadow: 0 0 8px rgba(255, 69, 0, 0.6), 0 0 15px rgba(255, 69, 0, 0.5);
+            }
+            30% {
+                color: #FF8C00; /* Dark Orange */
+                text-shadow: 0 0 8px rgba(255, 140, 0, 0.6), 0 0 15px rgba(255, 140, 0, 0.5);
+            }
+            45% {
+                color: #FF69B4; /* Hot Pink */
+                text-shadow: 0 0 8px rgba(255, 105, 180, 0.6), 0 0 15px rgba(255, 105, 180, 0.5);
+            }
+            60% {
+                color: #FF007F; /* Rose */
+                text-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 15px rgba(255, 0, 127, 0.5);
+            }
+            75% {
+                color: #DC143C; /* Crimson */
+                text-shadow: 0 0 8px rgba(220, 20, 60, 0.6), 0 0 15px rgba(220, 20, 60, 0.5);
+            }
+            90% {
+                color: #E60026; /* Slightly brighter red */
+                text-shadow: 0 0 5px rgba(230, 0, 38, 0.5), 0 0 10px rgba(230, 0, 38, 0.4);
+            }
         }
 
-        h1, h2, h3, h4, h5, h6 {
-            font-weight: 700; /* Bold headings */
-            color: white; /* Ensure headings are white */
+        /* Background color animation for red accents (background + glow) - FASTER with MORE VARIETY */
+        @keyframes neon-bg-glow {
+            0%, 100% {
+                background-color: #FF0000; /* Pure Red */
+                box-shadow: 0 0 5px rgba(255, 0, 0, 0.5), 0 0 10px rgba(255, 0, 0, 0.4);
+            }
+            15% {
+                background-color: #FF4500; /* Orange-Red */
+                box-shadow: 0 0 8px rgba(255, 69, 0, 0.6), 0 0 15px rgba(255, 69, 0, 0.5);
+            }
+            30% {
+                background-color: #FF8C00; /* Dark Orange */
+                box-shadow: 0 0 8px rgba(255, 140, 0, 0.6), 0 0 15px rgba(255, 140, 0, 0.5);
+            }
+            45% {
+                background-color: #FF69B4; /* Hot Pink */
+                box-shadow: 0 0 8px rgba(255, 105, 180, 0.6), 0 0 15px rgba(255, 105, 180, 0.5);
+            }
+            60% {
+                background-color: #FF007F; /* Rose */
+                box-shadow: 0 0 8px rgba(255, 0, 127, 0.6), 0 0 15px rgba(255, 0, 127, 0.5);
+            }
+            75% {
+                background-color: #DC143C; /* Crimson */
+                box-shadow: 0 0 8px rgba(220, 20, 60, 0.6), 0 0 15px rgba(220, 20, 60, 0.5);
+            }
+            90% {
+                background-color: #E60026; /* Slightly brighter red */
+                box-shadow: 0 0 5px rgba(230, 0, 38, 0.5), 0 0 10px rgba(230, 0, 38, 0.4);
+            }
         }
 
-        /* Subtle Background Gradient */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-/* Subtle radial gradient for depth */
-background: radial-gradient(circle at top left, rgba(88, 101, 242, 0.1) 0%, transparent 25%),
-            radial-gradient(circle at bottom right, rgba(79, 84, 92, 0.1) 0%, transparent 25%);
-            z-index: -2; /* Further back */
+
+        .text-red-accent {
+            color: #DC2626; /* Default red */
+            animation: neon-glow 6s infinite alternate ease-in-out; /* Adjusted to 6s for smoother, faster cycling */
         }
-
-
-        /* Discord-like Scrollbar */
+        .bg-red-accent {
+            background-color: #DC2626; /* Default red */
+            animation: neon-bg-glow 6s infinite alternate ease-in-out; /* Adjusted to 6s for smoother, faster cycling */
+        }
+        /* Border-red-accent won't animate color directly, but will use base red */
+        .border-red-accent {
+            border-color: #DC2626; /* A strong red accent */
+        }
+        /* Custom scrollbar for a cleaner look */
         ::-webkit-scrollbar {
             width: 8px;
         }
-
         ::-webkit-scrollbar-track {
-            background: var(--discord-darker);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--discord-grey-hover);
+            background: #080000; /* Dark red track */
             border-radius: 4px;
         }
-
+        ::-webkit-scrollbar-thumb {
+            background: #330000; /* Slightly lighter red thumb */
+            border-radius: 4px;
+        }
         ::-webkit-scrollbar-thumb:hover {
-            background: #6a717c;
+            background: #550000;
         }
 
-        .glassmorphic-card {
-            background-color: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--glass-border);
-            border-radius: 16px;
-            box-shadow: 0 15px 50px 0 var(--glass-shadow); /* Stronger shadow */
-            position: relative;
-            overflow: hidden;
-            transition: transform 0.4s ease, box-shadow 0.4s ease; /* Smoother transition */
-            z-index: 1; /* Ensure cards are above background pattern */
-        }
-
-        .glassmorphic-card:hover {
-             transform: translateY(-8px); /* More pronounced lift effect */
-             box-shadow: 0 20px 60px 0 var(--glass-shadow); /* Stronger shadow on hover */
-        }
-
-        .animated-gloss {
-            content: '';
-            position: absolute;
-            top: -100%; /* Cover more area */
-            left: -100%; /* Cover more area */
-            width: 300%; /* Larger gloss */
-            height: 300%; /* Larger gloss */
-            background: linear-gradient(
-                60deg,
-                rgba(255, 255, 255, 0.2) 0%, /* Stronger gloss */
-                rgba(255, 255, 255, 0.1) 50%, /* Stronger gloss */
-                rgba(255, 255, 255, 0.2) 100% /* Stronger gloss */
-            );
-            transform: rotate(45deg);
-            opacity: 0.7; /* Slightly more visible */
-            animation: gloss-slide 12s infinite linear; /* Slower, smoother animation */
-            pointer-events: none;
-             z-index: 0; /* Ensure gloss is behind content but within the card */
-        }
-
-        @keyframes gloss-slide {
-            0% { transform: rotate(45deg) translate(-100%, -100%); }
-            100% { transform: rotate(45deg) translate(100%, 100%); }
-        }
-
-        .discord-sidebar {
-            background-color: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            border-right: 1px solid var(--glass-border);
-            width: 280px; /* Wider sidebar */
-            flex-shrink: 0;
-            position: fixed;
-            height: 100vh;
-            overflow-y: auto;
-            z-index: 10;
-            padding: 20px 0; /* Adjust padding */
-        }
-
-        .discord-sidebar .logo {
-            font-size: 1.8rem; /* Larger logo text */
-            font-weight: 700;
-            color: white;
-            text-align: center;
-            margin-bottom: 30px; /* More space below logo */
-            padding: 0 20px;
-        }
-
-        .discord-main-content {
-            margin-left: 280px; /* Offset for wider sidebar */
-            padding: 40px; /* Increased padding */
-            flex-grow: 1;
-        }
-
-        section {
-             margin-bottom: 40px; /* More space between sections */
-             padding: 30px; /* Increased internal padding */
-        }
-
-        /* Adjust spacing for the About section specifically */
-        #about {
-            padding-top: 20px; /* Reduced top padding */
-        }
-
-         #about h2 {
-            margin-bottom: 20px; /* Reduced margin below heading */
-         }
-
-
-        /* Style for navigation links */
-        .nav-link {
-            display: block;
-            padding: 14px 30px; /* Increased padding */
-            color: var(--discord-text);
-            text-decoration: none;
-            transition: background-color 0.2s ease, color 0.2s ease;
-            border-radius: 8px;
-            margin: 6px 15px; /* Adjusted margin */
-            font-size: 1.1rem;
-            font-weight: 600; /* Semi-bold */
-        }
-
-        .nav-link:hover {
-            background-color: var(--discord-grey-hover);
-            color: white;
-        }
-
-        .nav-link.active {
-            background-color: var(--discord-blue);
-            color: white;
-             box-shadow: 0 2px 8px rgba(88, 101, 242, 0.4); /* Subtle shadow for active */
-        }
-
-        /* Portfolio grid */
-        .portfolio-grid {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Flexible grid */
-            gap: 30px; /* Increased gap */
-        }
-
-        /* Portfolio item styling */
-        .portfolio-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-            background-color: rgba(47, 49, 54, 0.5); /* Slightly more opaque */
-            border: 1px solid rgba(79, 84, 92, 0.3); /* Slightly more opaque */
-             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for items */
-        }
-
-        .portfolio-item:hover {
-            transform: scale(1.04); /* Slightly more zoom */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4); /* Stronger shadow on hover */
-        }
-
-        .portfolio-item img {
-            width: 100%;
-            height: 220px; /* Slightly increased height */
-            object-fit: cover;
-            display: block;
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
-            color: white;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            opacity: 0;
-            transition: opacity 0.4s ease; /* Smoother transition */
-            padding: 20px;
-            text-align: center;
-        }
-
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-
-        .portfolio-overlay span {
-            font-size: 1.4rem; /* Larger title */
-            font-weight: bold;
-            margin-bottom: 8px; /* More space below title */
-        }
-
-         .portfolio-overlay p {
-             font-size: 0.95rem; /* Slightly larger description */
-             color: var(--discord-light-text);
-         }
-
-
-        /* Contact form styling */
-        .contact-form input,
-        .contact-form textarea {
-            background-color: rgba(47, 49, 54, 0.6); /* More opaque */
-            border: 1px solid rgba(79, 84, 92, 0.5); /* More opaque */
-            color: var(--discord-text);
-            padding: 12px; /* Increased padding */
-            border-radius: 8px; /* More rounded */
-            transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-        }
-
-        .contact-form input:focus,
-        .contact-form textarea:focus {
-            border-color: var(--discord-blue);
-            box-shadow: 0 0 0 2px rgba(88, 101, 242, 0.4); /* Blue glow */
-            background-color: rgba(47, 49, 54, 0.7); /* Less transparent on focus */
-            outline: none; /* Remove default outline */
-        }
-
-        .contact-form label {
-            font-weight: 600; /* Semi-bold labels */
-            margin-bottom: 5px;
-            display: block; /* Ensure label is on its own line */
-            color: var(--discord-light-text);
-        }
-
-        .contact-form button {
-            background-color: var(--discord-blue);
-            color: white;
-            font-weight: 600;
-            border-radius: 8px;
-            padding: 14px 28px; /* Increased padding */
-            transition: background-color 0.2s ease, transform 0.1s ease;
-            font-size: 1.1rem;
-        }
-
-        .contact-form button:hover {
-            background-color: var(--discord-blue-darker);
-            transform: translateY(-2px); /* Subtle press effect */
-        }
-
-        /* Testimonials Section */
-        .testimonial-card {
-            background-color: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
-            border: 1px solid var(--glass-border);
-            border-radius: 16px; /* Match main card radius */
-            box-shadow: 0 8px 25px 0 var(--glass-shadow); /* Stronger shadow */
-            padding: 25px; /* Increased padding */
-            margin-bottom: 25px; /* Increased margin */
-            position: relative;
-        }
-
-        .testimonial-card .quote-icon {
-            color: var(--discord-light-text);
-            font-size: 2.5rem; /* Larger icon */
-            opacity: 0.7; /* More visible */
-            position: absolute;
-            top: 20px; /* Adjusted position */
-            left: 20px; /* Adjusted position */
-        }
-
-         .testimonial-card p {
-            font-style: italic;
-            margin-bottom: 15px; /* More space below quote */
-            padding-left: 40px; /* More space for quote icon */
-            font-size: 1.05rem; /* Slightly larger text */
-         }
-
-         .testimonial-card .author {
-            font-weight: bold;
-            text-align: right;
-            color: var(--discord-light-text);
-            font-size: 1rem;
-         }
-
-        /* Skills Section */
-        .skill-item {
-            background-color: rgba(79, 84, 92, 0.4); /* More opaque */
-            border-radius: 8px; /* More rounded */
-            padding: 10px 18px; /* Increased padding */
-            margin: 6px; /* Increased margin */
-            display: inline-block;
-            font-size: 0.95rem; /* Slightly larger font */
-            color: var(--discord-text); /* Text color */
-            font-weight: 600; /* Semi-bold */
-            transition: background-color 0.2s ease;
-        }
-
-        .skill-item:hover {
-            background-color: rgba(79, 84, 92, 0.6); /* Darker on hover */
-        }
-
-
-        /* Social Links */
-        .social-links {
-            padding: 0 20px; /* Match sidebar padding */
-        }
-        .social-links a {
-            color: var(--discord-light-text);
-            font-size: 1.6rem; /* Slightly larger icons */
-            margin: 0 12px; /* Increased margin */
-            transition: color 0.2s ease, transform 0.2s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--discord-blue);
-            transform: translateY(-3px); /* Lift effect on hover */
-        }
-
-        /* Responsive video container */
+        /* Basic styles for responsive video embedding */
         .video-container {
             position: relative;
             width: 100%;
             padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
             height: 0;
             overflow: hidden;
-            margin-bottom: 20px; /* Adjusted space below video */
-            border-radius: 12px; /* Match card rounding */
-             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow for video */
+            border-radius: 0.5rem; /* rounded-lg */
         }
 
-        .video-container iframe {
+        /* New CSS for Instagram style video (9:16 aspect ratio) */
+        .video-container-instagram {
+            position: relative;
+            width: 100%;
+            padding-bottom: 177.77%; /* 9:16 Aspect Ratio (16/9 * 100%) */
+            height: 0;
+            overflow: hidden;
+            border-radius: 0.5rem; /* rounded-lg */
+        }
+
+        .video-container iframe,
+        .video-container video,
+        .video-container-instagram iframe,
+        .video-container-instagram video {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            border: 0;
         }
 
+        /* Glassmorphism Effect */
+        .glassmorphic-card {
+            background-color: rgba(255, 255, 255, 0.03); /* Translucent white over dark red background */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px); /* For Safari support */
+            border: 1px solid rgba(255, 255, 255, 0.08); /* Subtle white border */
+            border-radius: 0.75rem; /* slightly more rounded corners for premium feel */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Very subtle dark shadow for depth */
+        }
 
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .discord-sidebar {
-                width: 100%;
-                height: auto;
-                position: static;
-                border-right: none;
-                border-bottom: 1px solid var(--glass-border);
-                padding: 15px 0;
-            }
+        /* Section dividers with subtle white tint */
+        .section-divider-border {
+            border-color: rgba(255, 255, 255, 0.08); /* Very subtle white border */
+        }
 
-             .discord-sidebar .logo {
-                 margin-bottom: 20px;
-             }
+        /* Further minimal adjustments for a premium feel */
+        .section-heading {
+            letter-spacing: 0.06em; /* Slightly wider letter spacing for headings */
+            font-weight: 700; /* Ensure headings are bold */
+        }
+        .portfolio-item, .skill-item {
+            transition: all 0.3s ease-in-out;
+        }
+        .portfolio-item:hover, .skill-item:hover {
+            transform: translateY(-0.35rem); /* Slightly more pronounced lift on hover */
+            border-color: #DC2626; /* Red accent on hover for the whole card */
+            box-shadow: 0 5px 20px rgba(220, 38, 38, 0.2); /* Subtle red glow on hover */
+        }
+        /* Override specific border for glassmorphic cards to be consistent */
+        .portfolio-item, .skill-item {
+             border-left-width: 4px; /* Ensure left border exists for the hover effect */
+        }
+        /* Premium button hover effect with gradient */
+        .premium-button {
+            transition: all 0.3s ease-in-out;
+        }
+        .premium-button:hover {
+            background-image: linear-gradient(to right, #CC0000, #AA0000); /* Darker red gradient on hover */
+            box-shadow: 0 4px 15px rgba(220, 38, 38, 0.6); /* More prominent shadow/glow */
+            animation: none; /* Disable neon animation on hover for a direct effect */
+        }
+        .wip-tag {
+            background-color: #DC2626; /* Static red, animation won't apply to this specific class directly for simplicity */
+            color: #000000;
+            font-size: 0.65rem; /* Smaller font size */
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 0.25rem;
+            margin-left: 0.75rem; /* Spacing from the title */
+            vertical-align: middle;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1; /* Adjust line height for better vertical alignment */
+        }
 
-            .discord-main-content {
-                margin-left: 0;
-                padding: 20px;
-            }
+        /* Modal specific styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8); /* Darker overlay for focus */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .modal-overlay.is-active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .modal-content {
+            position: relative;
+            max-width: 900px; /* Increased max width for video */
+            width: 90%;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+        }
+        /* Specific max-width for Instagram video modal to make it taller and narrower */
+        #instagram-video-modal .modal-content {
+            max-width: 400px; /* Adjust as needed for a portrait video */
+        }
+        .modal-overlay.is-active .modal-content {
+            transform: scale(1);
+        }
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            color: #FFFFFF;
+            cursor: pointer;
+            z-index: 1010;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.2s ease;
+        }
+        .modal-close:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
-            section {
-                margin-bottom: 30px;
-                padding: 20px;
-            }
+        /* Animated Grid Background - Further Improved Visibility */
+        .animated-grid-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            background-image:
+                linear-gradient(to right, rgba(255, 255, 255, 0.15) 1px, transparent 1px), /* Increased opacity of lines */
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.15) 1px, transparent 1px); /* Increased opacity of lines */
+            background-size: 50px 50px;
+            animation: grid-movement 60s linear infinite;
+            opacity: 0.85; /* Further increased overall opacity */
+            filter: brightness(1); /* Set brightness to 1 to remove dimming if any */
+        }
 
-            .nav-link {
-                display: inline-block;
-                margin: 4px;
-                padding: 8px 15px;
-                font-size: 1rem;
-            }
+        @keyframes grid-movement {
+            0% { background-position: 0 0; }
+            100% { background-position: 50px 50px; }
+        }
 
-            .portfolio-grid {
-                 gap: 20px;
-            }
-
-            .portfolio-item img {
-                 height: 160px;
-            }
-
-             .testimonial-card {
-                 padding: 20px;
-             }
-
-             .testimonial-card .quote-icon {
-                 font-size: 2rem;
-                 top: 15px;
-                 left: 15px;
-             }
-
-             .testimonial-card p {
-                 padding-left: 30px;
-                 font-size: 1rem;
-             }
-
-              .social-links {
-                 padding: 0 10px;
-             }
-             .social-links a {
-                 font-size: 1.4rem;
-                 margin: 0 8px;
-             }
+        /* Ensure content is above the grid */
+        .header, .hero-section, .portfolio-section, .skills-section, .contact-section, .footer {
+            position: relative;
+            z-index: 1;
         }
     </style>
 </head>
-<body>
+<body class="bg-black text-white antialiased">
 
-    <div class="flex flex-col md:flex-row min-h-screen">
-        <aside class="discord-sidebar">
-            <div class="logo">Rakshith</div>
+    <!-- Animated Grid Background -->
+    <div class="animated-grid-background"></div>
+
+    <!-- Header Section -->
+    <header class="bg-black border-b section-divider-border py-5 md:py-7 sticky top-0 z-50">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <a href="#home" class="text-2xl md:text-3xl font-bold tracking-wider rounded-md focus:outline-none focus:ring-2 focus:ring-red-accent p-2">
+                RAKSHITH <span class="text-red-accent">|</span> EDITOR
+            </a>
             <nav>
-                <ul>
-                    <li><a href="#about" class="nav-link active">About</a></li>
-                    <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-                     <li><a href="#skills" class="nav-link">Skills</a></li>
-                    <li><a href="#services" class="nav-link">Services</a></li>
-                     <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                <ul class="flex space-x-6 md:space-x-10">
+                    <li><a href="#home" class="text-white hover:text-red-accent transition duration-300 font-medium rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-accent">Home</a></li>
+                    <li><a href="#portfolio" class="text-white hover:text-red-accent transition duration-300 font-medium rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-accent">Portfolio</a></li>
+                    <li><a href="#skills" class="text-white hover:text-red-accent transition duration-300 font-medium rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-accent">Skills</a></li>
+                    <li><a href="#contact" class="text-white hover:text-red-accent transition duration-300 font-medium rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-red-accent">Contact</a></li>
                 </ul>
             </nav>
-             <div class="mt-8 text-center social-links">
-                <a href="#" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="#" target="_blank" aria-label="Vimeo"><i class="fab fa-vimeo"></i></a>
-                <a href="#" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                </div>
-        </aside>
+        </div>
+    </header>
 
-        <main class="discord-main-content">
-
-            <section id="about" class="glassmorphic-card">
-                <div class="animated-gloss"></div>
-                <h2 class="text-3xl font-bold mb-6 text-white">About Me</h2>
-
-                <div class="video-container">
-                    <iframe src="https://www.youtube.com/embed/your_video_id" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-
-                </section>
-
-            <section id="portfolio" class="glassmorphic-card">
-                 <div class="animated-gloss"></div>
-                <h2 class="text-3xl font-bold mb-6 text-white">Portfolio</h2>
-                <div class="grid portfolio-grid">
-                    <div class="portfolio-item">
-                         <img src="https://placehold.co/600x400/202225/dcddde?text=Project+1" alt="Project 1 Thumbnail">
-                        <div class="portfolio-overlay">
-                            <span class="text-xl font-semibold">Project Title 1</span>
-                             <p class="text-sm mt-2">[Brief description of the project]</p>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                         <img src="https://placehold.co/600x400/202225/dcddde?text=Project+2" alt="Project 2 Thumbnail">
-                         <div class="portfolio-overlay">
-                            <span class="text-xl font-semibold">Project Title 2</span>
-                             <p class="text-sm mt-2">[Brief description of the project]</p>
-                        </div>
-                    </div>
-                    <div class="portfolio-item">
-                         <img src="https://placehold.co/600x400/202225/dcddde?text=Project+3" alt="Project 3 Thumbnail">
-                         <div class="portfolio-overlay">
-                            <span class="text-xl font-semibold">Project Title 3</span>
-                             <p class="text-sm mt-2">[Brief description of the project]</p>
-                        </div>
-                    </div>
-                     </div>
-            </section>
-
-             <section id="skills" class="glassmorphic-card">
-                 <div class="animated-gloss"></div>
-                <h2 class="text-3xl font-bold mb-6 text-white">Skills</h2>
-                <div class="flex flex-wrap gap-3">
-                    <span class="skill-item">Adobe Premiere Pro</span>
-                    <span class="skill-item">After Effects</span>
-                    <span class="skill-item">DaVinci Resolve</span>
-                    <span class="skill-item">Color Grading</span>
-                    <span class="skill-item">Sound Design</span>
-                    <span class="skill-item">Motion Graphics</span>
-                    <span class="skill-item">Video Editing</span>
-                    <span class="skill-item">Social Media Content</span>
-                    </div>
-            </section>
-
-
-            <section id="services" class="glassmorphic-card">
-                 <div class="animated-gloss"></div>
-                <h2 class="text-3xl font-bold mb-6 text-white">Services Offered</h2>
-                <ul class="list-disc list-inside text-lg leading-relaxed space-y-3">
-                    <li>Video Editing (Promotional, Social Media, Corporate, Events, etc.)</li>
-                    <li>Color Correction and Grading to enhance visual mood</li>
-                    <li>Professional Sound Design and Mixing</li>
-                    <li>Engaging Motion Graphics and Visual Effects</li>
-                    <li>Creation of Short-Form Content (Reels, TikToks, Shorts)</li>
-                    <li>Video Consulting and Strategy</li>
-                    </ul>
-            </section>
-
-             <section id="testimonials" class="glassmorphic-card">
-                 <div class="animated-gloss"></div>
-                <h2 class="text-3xl font-bold mb-6 text-white">Testimonials</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div class="testimonial-card">
-                        <i class="fas fa-quote-left quote-icon"></i>
-                        <p>"Rakshith delivered exceptional video editing work for our project. They were professional, creative, and met all deadlines. Highly recommended!"</p>
-                        <div class="author">- [Client Name], [Company/Project]</div>
-                    </div>
-                     <div class="testimonial-card">
-                         <i class="fas fa-quote-left quote-icon"></i>
-                        <p>"Working with Rakshith was a fantastic experience. Their attention to detail and ability to understand our vision resulted in a video that exceeded our expectations."</p>
-                        <div class="author">- [Client Name], [Company/Project]</div>
-                    </div>
-                    </div>
-            </section>
-
-
-            <section id="contact" class="glassmorphic-card contact-form">
-                 <div class="animated-gloss"></div>
-                <h2 class="text-3xl font-bold mb-6 text-white">Get in Touch</h2>
-                <p class="text-lg leading-relaxed mb-8">
-                    Ready to start your next video project? Fill out the form below or contact me directly!
+    <!-- Hero / About Section -->
+    <section id="home" class="flex flex-col md:flex-row items-center justify-center text-center md:text-left p-8 min-h-screen py-28 hero-section">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-center md:space-x-20">
+            <div class="md:w-1/2 mb-16 md:mb-0">
+                <h1 class="text-5xl md:text-7xl font-extrabold leading-tight mb-8 section-heading">
+                    Crafting Stories Through <span class="text-red-accent">Dynamic Visuals</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-12 font-light">
+                    Passionate video editor with a keen eye for detail and a commitment to transforming raw footage into captivating narratives. Specializing in high-quality post-production for diverse projects.
                 </p>
-                <form>
-                    <div class="mb-5">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" class="mt-1 block w-full focus:outline-none focus:ring">
-                    </div>
-                    <div class="mb-5">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" class="mt-1 block w-full focus:outline-none focus:ring">
-                    </div>
-                     <div class="mb-5">
-                        <label for="subject">Subject (Optional)</label>
-                        <input type="text" id="subject" name="subject" class="mt-1 block w-full focus:outline-none focus:ring">
-                    </div>
-                    <div class="mb-6">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" rows="6" class="mt-1 block w-full focus:outline-none focus:ring"></textarea>
-                    </div>
-                    <button type="submit">Send Message</button>
-                </form>
-            </section>
+                <a href="#portfolio" class="inline-block bg-red-accent text-black font-semibold py-4 px-10 rounded-full transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-red-accent focus:ring-opacity-75 premium-button">
+                    View My Portfolio
+                </a>
+            </div>
+            <div class="md:w-1/2 w-full rounded-xl overflow-hidden glassmorphic-card">
+                <h3 class="text-lg font-semibold p-4 bg-black/40 text-white rounded-t-xl border-b border-white/10 flex items-center">
+                    About Me Video
+                    <span class="wip-tag">WIP</span>
+                </h3>
+                <div class="video-container">
+                    <!-- Replace 'YOUR_YOUTUBE_VIDEO_ID' or 'YOUR_VIMEO_VIDEO_ID' with your actual video ID -->
+                    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="About Me Video Placeholder" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
 
-             <footer class="text-center py-8 text-gray-500 text-sm">
-                <p>© 2024 Rakshith. All rights reserved.</p>
-            </footer>
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 md:py-36 border-t border-b section-divider-border portfolio-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-heading flex items-center justify-center">
+                My <span class="text-red-accent">Work</span>
+                <span class="wip-tag ml-4">WIP</span>
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 max-w-6xl mx-auto">
+                <!-- Short Film Project -->
+                <div class="rounded-xl overflow-hidden border-l-4 border-transparent portfolio-item glassmorphic-card">
+                    <img src="https://placehold.co/600x350/111111/EEEEEE?text=%E2%96%B6%EF%B8%8F+Short+Film" alt="Short Film Thumbnail" class="w-full h-auto object-cover border-b border-white/10">
+                    <div class="p-10">
+                        <h3 class="text-3xl font-semibold mb-4">Captivating Short Film</h3>
+                        <p class="text-gray-300 text-base mb-8">An emotionally resonant short film showcasing narrative editing, nuanced color grading, and compelling sound design.</p>
+                        <a href="#" class="text-red-accent hover:underline font-medium text-base inline-flex items-center group">
+                            Watch Video
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </a>
+                    </div>
+                </div>
 
-        </main>
+                <!-- Wedding Video Project -->
+                <div class="rounded-xl overflow-hidden border-l-4 border-transparent portfolio-item glassmorphic-card">
+                    <!-- Video Preview Container for Wedding Video -->
+                    <div id="wedding-preview-container" class="relative w-full h-0 pb-[56.25%] overflow-hidden border-b border-white/10 group cursor-pointer">
+                        <video preload="metadata" muted loop playsinline
+                               src="https://www.w3schools.com/html/mov_bbb.mp4#t=1"
+                               poster="https://placehold.co/600x350/111111/EEEEEE?text=%E2%96%B6%EF%B8%8F+Wedding+Film"
+                               class="absolute top-0 left-0 w-full h-full object-cover">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- Play icon overlay -->
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                            <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                    <div class="p-10">
+                        <h3 class="text-3xl font-semibold mb-4">Timeless Wedding Story</h3>
+                        <p class="text-gray-300 text-base mb-8">Crafting a beautiful and memorable wedding video, preserving precious moments with elegant transitions and heartfelt storytelling.</p>
+                        <a href="#" id="open-wedding-video-modal" class="text-red-accent hover:underline font-medium text-base inline-flex items-center group">
+                            Watch Video
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- New Instagram Style Video Project -->
+                <div class="rounded-xl overflow-hidden border-l-4 border-transparent portfolio-item glassmorphic-card">
+                    <!-- Video Preview Container for Instagram Video -->
+                    <div id="instagram-preview-container" class="relative w-full h-0 pb-[177.77%] overflow-hidden border-b border-white/10 group cursor-pointer">
+                        <video preload="metadata" muted loop playsinline
+                               src="https://github.com/August4599/webite/raw/refs/heads/main/WhatsApp%20Video%202025-06-21%20at%209.24.05%20PM.mp4#t=1"
+                               poster="https://placehold.co/600x1067/111111/EEEEEE?text=%E2%96%B6%EF%B8%8F+Instagram+Reel"
+                               class="absolute top-0 left-0 w-full h-full object-cover">
+                            Your browser does not support the video tag.
+                        </video>
+                        <!-- Play icon overlay -->
+                        <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-100 group-hover:opacity-0 transition-opacity duration-300">
+                            <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                    </div>
+                    <div class="p-10">
+                        <h3 class="text-3xl font-semibold mb-4">Dynamic Instagram Reel</h3>
+                        <p class="text-gray-300 text-base mb-8">Engaging short-form video designed for social media, optimized for vertical viewing and quick impact storytelling.</p>
+                        <a href="#" id="open-instagram-video-modal" class="text-red-accent hover:underline font-medium text-base inline-flex items-center group">
+                            Watch Video
+                            <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform duration-200" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 md:py-36 skills-section">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-heading">My <span class="text-red-accent">Skills</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+
+                <!-- Skill Card: DaVinci Resolve -->
+                <div class="rounded-xl border-l-4 border-transparent text-center skill-item glassmorphic-card p-10">
+                    <h3 class="text-3xl font-bold mb-5 text-red-accent">DaVinci Resolve</h3>
+                    <p class="text-gray-300 text-base">Proficient in all aspects of DaVinci Resolve, including editing, color grading, visual effects (Fusion), and audio post-production (Fairlight).</p>
+                </div>
+
+                <!-- Skill Card: After Effects -->
+                <div class="rounded-xl border-l-4 border-transparent text-center skill-item glassmorphic-card p-10">
+                    <h3 class="text-3xl font-bold mb-5 text-red-accent">After Effects</h3>
+                    <p class="text-gray-300 text-base">Expertise in motion graphics, visual effects (VFX), compositing, animation, and dynamic title design using Adobe After Effects.</p>
+                </div>
+
+                <!-- Skill Card: Premiere Pro -->
+                <div class="rounded-xl border-l-4 border-transparent text-center skill-item glassmorphic-card p-10">
+                    <h3 class="text-3xl font-bold mb-5 text-red-accent">Adobe Premiere Pro</h3>
+                    <p class="text-gray-300 text-base">Skilled in video editing, multi-cam editing, audio syncing, and efficient workflow management within Adobe Premiere Pro.</p>
+                </div>
+
+                <!-- Skill Card: Sound Design -->
+                <div class="rounded-xl border-l-4 border-transparent text-center skill-item glassmorphic-card p-10">
+                    <h3 class="text-3xl font-bold mb-5 text-red-accent">Sound Design & Mix</h3>
+                    <p class="text-gray-300 text-base">Ability to clean audio, create immersive soundscapes, and mix audio tracks for optimal clarity and impact.</p>
+                </div>
+
+                <!-- Skill Card: Color Grading -->
+                <div class="rounded-xl border-l-4 border-transparent text-center skill-item glassmorphic-card p-10">
+                    <h3 class="text-3xl font-bold mb-5 text-red-accent">Advanced Color Grading</h3>
+                    <p class="text-gray-300 text-base">Proficient in color correction, creative grading, and achieving cinematic looks to enhance visual storytelling.</p>
+                </div>
+
+                <!-- Skill Card: Storytelling -->
+                <div class="rounded-xl border-l-4 border-transparent text-center skill-item glassmorphic-card p-10">
+                    <h3 class="text-3xl font-bold mb-5 text-red-accent">Visual Storytelling</h3>
+                    <p class="text-gray-300 text-base">Strong understanding of narrative structure, pacing, and visual rhythm to create compelling and engaging video content.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 md:py-36 border-t section-divider-border contact-section">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-20 section-heading">Get in <span class="text-red-accent">Touch</span></h2>
+            <p class="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto font-light">
+                Have a project in mind or just want to say hello? Feel free to reach out! I'm always open to new opportunities and collaborations.
+            </p>
+            <div class="flex flex-col items-center space-y-8">
+                <a href="mailto:rakshith4599@gmail.com" class="text-2xl md:text-3xl text-red-accent hover:underline rounded-md focus:outline-none focus:ring-2 focus:ring-red-accent p-2">
+                    rakshith4599@gmail.com
+                </a>
+                <div class="flex space-x-8 mt-6">
+                    <!-- LinkedIn Icon - Placeholder (replace with actual SVG/Font Awesome if needed) -->
+                    <a href="https://linkedin.com/in/rakshithprofile" target="_blank" class="text-white hover:text-red-accent transition duration-300 rounded-full p-3 focus:outline-none focus:ring-2 focus:ring-red-accent" aria-label="LinkedIn">
+                        <svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.761-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <!-- Vimeo Icon - Placeholder -->
+                    <a href="https://vimeo.com/rakshithprofile" target="_blank" class="text-white hover:text-red-accent transition duration-300 rounded-full p-3 focus:outline-none focus:ring-2 focus:ring-red-accent" aria-label="Vimeo">
+                        <svg class="w-9 h-9" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path d="M22.052 7.159c-.432 1.944-1.759 3.821-3.985 5.626-2.185 1.77-4.636 2.655-7.353 2.655-.913 0-1.666-.277-2.26-.83-.6-.554-.928-1.284-.985-2.193-.058-.913.314-1.71.691-2.392.378-.68.647-1.127.818-1.428.17-.306.183-.497.039-.588-.142-.089-.427-.156-.85-.198-.423-.042-.816-.062-1.18-.062-1.262 0-2.317.513-3.167 1.539-.85.992-1.28 2.302-1.28 3.931 0 1.956.892 3.65 2.677 5.086 1.782 1.436 3.998 2.155 6.649 2.155 2.946 0 5.485-.945 7.618-2.834 2.13-1.89 3.197-4.49 3.197-7.799 0-1.792-.35-3.415-1.047-4.864-.694-1.453-1.636-2.59-2.827-3.415-.867-.594-1.83-1.01-2.89-.993-.312 0-.613.06-.897.18-.285.12-.518.293-.7.519-.182.228-.316.48-.403.757-.087.279-.115.54-.087.784.029.244.116.485.26.723.144.238.297.436.46.593.16.157.3.266.42.327.118.062.203.078.252.051.047-.027.064-.108.05-.24-.017-.132-.05-.306-.096-.52-.047-.215-.098-.38-.153-.496-.057-.116-.098-.188-.124-.216-.027-.028-.02-.036.02-.023.042.013.09.03.14.053.05.024.08.038.09.043.007.005.01.004.008-.003-.003-.007-.01-.013-.02-.018-.01-.005-.018-.007-.022-.007-.003 0-.007.003-.01.008-.003.005-.005.008-.005.008l-.004-.007c-.004-.007-.004-.007-.004-.007-.004-.008-.006-.013-.007-.014-.002-.002-.002-.002-.002-.002l-.007-.01c-.004-.006-.008-.01-.01-.01-.003 0-.005-.002-.005-.005l-.005-.015c-.003-.01-.003-.015-.003-.015-.002-.008-.002-.012-.002-.012l-.002-.004c-.002-.004-.002-.007-.002-.007l-.002-.004c-.002-.004-.002-.007-.002-.007z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-10 border-t section-divider-border text-center text-gray-400 text-sm">
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 Rakshith. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Wedding Video Modal -->
+    <div id="wedding-video-modal" class="modal-overlay">
+        <div class="modal-content glassmorphic-card">
+            <button id="close-wedding-video-modal" class="modal-close">
+                &times;
+            </button>
+            <div class="video-container">
+                <video id="wedding-video-player" controls preload="auto" playsinline>
+                    <!-- Video will be loaded here by JavaScript -->
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- New Instagram Video Modal -->
+    <div id="instagram-video-modal" class="modal-overlay">
+        <div class="modal-content glassmorphic-card">
+            <button id="close-instagram-video-modal" class="modal-close">
+                &times;
+            </button>
+            <div class="video-container-instagram"> <!-- Using the new Instagram specific video container -->
+                <video id="instagram-video-player" controls preload="auto" playsinline>
+                    <!-- Video will be loaded here by JavaScript -->
+                </video>
+            </div>
+        </div>
     </div>
 
     <script>
-        // Simple script for active navigation link highlighting and smooth scrolling
-        document.addEventListener('DOMContentLoaded', () => {
-            const navLinks = document.querySelectorAll('.nav-link');
-            const sections = document.querySelectorAll('main section'); // Select sections within main
+        // Get elements for Wedding Video Modal
+        const openWeddingVideoModalBtn = document.getElementById('open-wedding-video-modal');
+        const weddingVideoModal = document.getElementById('wedding-video-modal');
+        const closeWeddingVideoModalBtn = document.getElementById('close-wedding-video-modal');
+        const weddingVideoPlayer = document.getElementById('wedding-video-player');
+        const weddingPreviewContainer = document.getElementById('wedding-preview-container'); // Get the preview container
 
-            // Function to update active link
-            const updateActiveLink = (id) => {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === '#' + id) {
-                        link.classList.add('active');
-                    }
-                });
-            };
+        // Get elements for Instagram Video Modal
+        const openInstagramVideoModalBtn = document.getElementById('open-instagram-video-modal');
+        const instagramVideoModal = document.getElementById('instagram-video-modal');
+        const closeInstagramVideoModalBtn = document.getElementById('close-instagram-video-modal');
+        const instagramVideoPlayer = document.getElementById('instagram-video-player');
+        const instagramPreviewContainer = document.getElementById('instagram-preview-container'); // Get the preview container
 
-            // Intersection Observer to highlight nav links on scroll
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                       updateActiveLink(entry.target.id);
-                    }
-                });
-            }, { threshold: 0.3 }); // Adjust threshold as needed
+        // Video URLs (Replace with your actual video URLs)
+        const weddingVideoUrl = "https://www.w3schools.com/html/mov_bbb.mp4"; // Using a reliable test MP4
+        const instagramVideoUrl = "https://github.com/August4599/webite/raw/refs/heads/main/WhatsApp%20Video%202025-06-21%20at%209.24.05%20PM.mp4"; // Updated Instagram video URL
 
-            sections.forEach(section => {
-                observer.observe(section);
+        // Function to open a generic modal
+        function openVideoModal(modalElement, videoPlayerElement, videoUrl) {
+            videoPlayerElement.src = videoUrl; // Set video source
+            modalElement.classList.add('is-active'); // Show modal
+            videoPlayerElement.load(); // Load the video
+            videoPlayerElement.play().catch(error => {
+                console.error("Video autoplay prevented:", error);
             });
+        }
 
-            // Smooth scrolling for navigation links
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetSection = document.getElementById(targetId);
+        // Function to close a generic modal
+        function closeVideoModal(modalElement, videoPlayerElement) {
+            modalElement.classList.remove('is-active'); // Hide modal
+            videoPlayerElement.pause(); // Pause video
+            videoPlayerElement.currentTime = 0; // Reset video to beginning
+            videoPlayerElement.src = ''; // Clear video source
+            videoPlayerElement.load(); // Unload the video to release resources
+        }
 
-                    if (targetSection) {
-                         window.scrollTo({
-                            top: targetSection.offsetTop - 40, // Adjusted offset for padding/spacing
-                            behavior: 'smooth'
-                        });
-                        // Update active link immediately on click
-                        updateActiveLink(targetId);
-                    }
-                });
+        // Event listener for opening Wedding Video Modal (from "Watch Video" link)
+        if (openWeddingVideoModalBtn) {
+            openWeddingVideoModalBtn.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior
+                openVideoModal(weddingVideoModal, weddingVideoPlayer, weddingVideoUrl);
             });
+        }
 
-             // Initial active link set on page load
-            // Find the first section and set its link as active initially
-            const firstSection = document.querySelector('main section');
-            if (firstSection) {
-                 updateActiveLink(firstSection.id);
+        // Event listener for opening Wedding Video Modal (from clicking the preview)
+        if (weddingPreviewContainer) {
+            weddingPreviewContainer.addEventListener('click', () => {
+                openVideoModal(weddingVideoModal, weddingVideoPlayer, weddingVideoUrl);
+            });
+            // Handle hover for preview video
+            const weddingPreviewVideo = weddingPreviewContainer.querySelector('video');
+            if (weddingPreviewVideo) {
+                weddingPreviewContainer.addEventListener('mouseenter', () => {
+                    weddingPreviewVideo.play().catch(error => { /* Autoplay might be blocked, catch error */ });
+                });
+                weddingPreviewContainer.addEventListener('mouseleave', () => {
+                    weddingPreviewVideo.pause();
+                    weddingPreviewVideo.currentTime = 0; // Reset to beginning
+                });
             }
+        }
 
-             // Optional: Add fade-in animation on scroll for sections
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                        sectionObserver.unobserve(entry.target); // Stop observing once visible
-                    }
-                });
-            }, { threshold: 0.1 }); // Trigger when 10% of the section is visible
 
-            sections.forEach(section => {
-                 section.style.opacity = 0; // Start invisible
-                 section.style.transform = 'translateY(20px)'; // Start slightly below
-                 section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out'; // Add transition
-                 sectionObserver.observe(section);
+        // Event listener for opening Instagram Video Modal (from "Watch Video" link)
+        if (openInstagramVideoModalBtn) {
+            openInstagramVideoModalBtn.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior
+                openVideoModal(instagramVideoModal, instagramVideoPlayer, instagramVideoUrl);
             });
-        });
-    </script>
+        }
 
+        // Event listener for opening Instagram Video Modal (from clicking the preview)
+        if (instagramPreviewContainer) {
+            instagramPreviewContainer.addEventListener('click', () => {
+                openVideoModal(instagramVideoModal, instagramVideoPlayer, instagramVideoUrl);
+            });
+            // Handle hover for preview video
+            const instagramPreviewVideo = instagramPreviewContainer.querySelector('video');
+            if (instagramPreviewVideo) {
+                instagramPreviewContainer.addEventListener('mouseenter', () => {
+                    instagramPreviewVideo.play().catch(error => { /* Autoplay might be blocked, catch error */ });
+                });
+                instagramPreviewContainer.addEventListener('mouseleave', () => {
+                    instagramPreviewVideo.pause();
+                    instagramPreviewVideo.currentTime = 0; // Reset to beginning
+                });
+            }
+        }
+
+        // Event listeners for closing Wedding Video Modal
+        if (closeWeddingVideoModalBtn) {
+            closeWeddingVideoModalBtn.addEventListener('click', () => closeVideoModal(weddingVideoModal, weddingVideoPlayer));
+        }
+        if (weddingVideoModal) {
+            weddingVideoModal.addEventListener('click', (e) => {
+                if (e.target === weddingVideoModal) {
+                    closeVideoModal(weddingVideoModal, weddingVideoPlayer);
+                }
+            });
+        }
+
+        // Event listeners for closing Instagram Video Modal
+        if (closeInstagramVideoModalBtn) {
+            closeInstagramVideoModalBtn.addEventListener('click', () => closeVideoModal(instagramVideoModal, instagramVideoPlayer));
+        }
+        if (instagramVideoModal) {
+            instagramVideoModal.addEventListener('click', (e) => {
+                if (e.target === instagramVideoModal) {
+                    closeVideoModal(instagramVideoModal, instagramVideoPlayer);
+                }
+            });
+        }
+
+        // Close any active modal on escape key press
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (weddingVideoModal.classList.contains('is-active')) {
+                    closeVideoModal(weddingVideoModal, weddingVideoPlayer);
+                }
+                if (instagramVideoModal.classList.contains('is-active')) {
+                    closeVideoModal(instagramVideoModal, instagramVideoPlayer);
+                }
+            }
+        });
+
+    </script>
 </body>
 </html>
